@@ -1,0 +1,26 @@
+Pitch
+
+- Qual é o seu projeto ou ideia?
+
+O nosso projeto se chama Code Red.
+
+- Qual o problema que ela resolve?
+
+Ele é um aplicativo cujo objetivo é informar os focos de incêndio assim como indicar a probabilidade de eles acontecerem para os usuários. O público alvo são as autoridades responsáveis pela segurança da população, como bombeiros e policiais, e também os cidadãos que desejam 
+
+- Como funciona?
+- Qual o impacto que ela gera?
+- Quais são os diferenciais da sua ideia?
+- Por que é uma boa solução?
+- É viável? Fácil de implementar? Porque?
+- Quais são os resultados esperados?
+
+Sugestão de estrutura:
+
+- Introdução
+- Problema
+- Solução
+- Como funciona
+- Resultados esperados (impacto)
+- Time
+- Pedido (para viabilizar)
