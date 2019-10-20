@@ -1,46 +1,76 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    },
+ons.disableAutoStyling();
+    var map;
+    document.addEventListener("deviceready", function() {
+      var div = document.getElementById("map_canvas");
+      document.getElementById("teste").style.marginLeft = "80%";
 
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-    },
+      // Create a Google Maps native view under the map_canvas div.
+      map = plugin.google.maps.Map.getMap(div);
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+      map.one(plugin.google.maps.event.MAP_READY, onMapInit);
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+    }, false);
 
-        console.log('Received Event: ' + id);
+    function onMapInit(){
+        navigator.geolocation.getCurrentPosition(function (localizacao) {
+            map.animateCamera({
+                target: { lat: localizacao.coords.latitude, lng: localizacao.coords.longitude },
+                zoom: 17
+                //tilt: 60,
+                //bearing: 140,
+                //duration: 5000
+            });
+
+            var marcador = map.addMarker({
+                position: { lat: localizacao.coords.latitude, lng: localizacao.coords.longitude },
+                title: "Você está aqui",
+                snippet: "E eu não estou brincando",
+                //icon: image,
+                animation: plugin.google.maps.Animation.BOUNCE
+            });
+
+            marcador.showInfoWindow();
+        }, console.error);
+
+        $.get("http://192.168.137.1:8080/teste/getHello", function(result){
+
+        }).done(function(response){
+            var image = "https://media.eadbox.com/system/uploads/medium/file/5dab61d12aef050033caef09/fire.png";
+            var data = [];
+            response.map(linha => {
+                console.log("iterando dados... " + new Date().toLocaleString('pt-BR'));
+                var obj = {
+                    position: { lat: linha.latitude, lng: linha.longitude },
+                    title: "Possível foco de incêndio",
+                    //title: "FRP: " + linha.frp,
+                    //snippet: "Confiança: " + linha.confianca + "%",
+                    icon: image
+                };
+                data.push(obj);
+                // console.log("mapeando... " + new Date().toLocaleString('pt-BR'));
+                // map.addMarker({
+                //     position: { lat: linha.latitude, lng: linha.longitude },
+                //     title: "FRP: " + linha.frp,
+                //     snippet: "Confiança: " + linha.confianca + "%",
+                //     icon: image
+                //     //animation: plugin.google.maps.Animation.BOUNCE
+                // });
+            })
+            var baseArray = new plugin.google.maps.BaseArrayClass(data);
+            baseArray.map(function (locationData) {
+                console.log("adicionando marker... " + new Date().toLocaleString('pt-BR'));
+                var marker = map.addMarker(locationData);
+                marker.on(plugin.google.maps.event.MARKER_CLICK, function() {
+                    //event.preventDefault();
+                    event.stopPropagation();
+                });
+                marker.off(plugin.google.maps.event.MARKER_CLICK, function() {
+                    //event.preventDefault();
+                    event.stopPropagation();
+                });
+            });
+        }).fail(function(response){
+            console.log("deu ruim :(");
+        })
+
     }
-};
-
-app.initialize();
