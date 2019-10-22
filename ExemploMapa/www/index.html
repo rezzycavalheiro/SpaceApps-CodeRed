@@ -15,9 +15,9 @@
             <template id="principal">
                 <ons-page id="principal">
                     <ons-tabbar animation="slide" swipeable position="auto">
-                            <ons-tab page="pag1" icon="fa-utensils" active></ons-tab>
-                            <ons-tab page="pag2" icon="fa-edit"></ons-tab>
-                            <ons-tab page="pag3" icon="fa-user-circle"></ons-tab>
+                         <ons-tab page="pag1" icon="fa-temperature-high" active></ons-tab>
+                         <ons-tab page="pag2" icon="fa-adn"></ons-tab>
+                         <ons-tab page="pag3" icon="fa-map-marked-alt"></ons-tab>
                     </ons-tabbar>
                 </ons-page>
             </template>
@@ -26,7 +26,7 @@
                 <ons-page id="pag1">
                     <div class="container">
                         <div id="map_canvas">
-                                <!-- <button id="button">Click me!</button> -->
+                            
                         </div>
                     </div>
                 </ons-page>
@@ -39,13 +39,36 @@
                         </div>
                         
                         <div id="teste" class="pinTermometro"></div>
+                        <a class="riskFire">NO RISK OF FIRE</a>
+                        <div class="alertInfo" style="margin-top: 2em; margin-left: 1.2em;">
+                            <center>
+                            <span style="font-size: 30px;">The chances of a fire in your area are very low</span>
+
+                            </center>
+                            <img src="../www/img/shield.png" alt="" style="margin-left: 128px;margin-top: 2em;">
+                        </div>
                     </div>
                 </ons-page>
             </template>
 
             <template id="pag3">
                 <ons-page id="pag3">
-
+                    <div class="pag3">
+                        <a class="reportFire">WOULD YOU LIKE TO REPORT A FIRE?</a>
+                        <a class="setLocation">Set a location: </a>
+                        <div id="map_canvas_report">
+                            
+                        </div>
+                        <div class="cameraButton">
+                            <ons-button class="botaoAddPicture" onclick="addPicture()" modifier="quiet">
+                                <ons-icon icon="fa-camera"></ons-icon>
+                                Add picture
+                            </ons-button>
+                            <img id="miniaturaImagem" width="64" height="64">
+                            <br><br>
+                            <ons-button onclick="reportFire()" class="reportButton" style="background-color: red;">Report</ons-button>
+                        </div>
+                    </div>
                 </ons-page>
             </template>
         </ons-navigator>

@@ -10,17 +10,71 @@
   width: 100%;
   height: 610px;
   position: absolute !important;
-  background-color: yellow;
+  background-color: #F5F3EA;
 }
 .termometro {
   height: 50px;
-  width: 100%;
-  background-image: linear-gradient(to right, white, yellow , red);
+  width: 90%;
+  background-image: linear-gradient(to right, #F5F3EA, #F7DE57, #FC9347, #FF0000);
   border-radius: 30px;
+  margin-top: 65px;
+  margin-left: 20px;
 }
 .pinTermometro {
   height: 50px;
   width: 2px; 
   background-color: black;
   margin-top: -50px;
+  margin-bottom: 70px;
+}
+.riskFire {
+  font-size: 35px;
+  margin-left: 2em;
+  text-align: center;
+  color: #5D4E4E;
+}
+
+.pag3{
+  margin-top: 100px;
+  background-color: #F5F3EA;
+  text-align: center;
+}
+
+.reportFire{
+  margin-top: -85px;
+  display: block;
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.setLocation{
+  font-size: 1.5em;
+  margin-left: -9em;
+  margin-bottom: 5em;
+}
+
+#map_canvas_report { /* Must bigger size than 100x100 pixels */
+  width: 100%;
+  height: 200px;
+  position: absolute !important;
+}
+
+.cameraButton {
+  margin-top: 14em;
+  margin-left: -15em;
+}
+
+.reportButton{
+  background-color: red;
+  margin-left: 14em;
+  width: 10em !important;
+}
+
+.miniaturaImagem{
+  margin-left: 4em;
+}
+
+.botaoAddPicture {
+  margin-left: 4em;
+  margin-top: -3em;
 }
